@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Economy</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h2>Earn 250 gold in 100 moves or less</h2>
+    <p>Your gold: {{ request.session.gold }}</p>
+    <p>Your potatoes: {{ request.session.potatoes }}</p>
+    <p>Your wheat: {{ request.session.wheat }}</p>
+    <p>Your corn: {{ request.session.corn }}</p>
+
+    <div id="options">
+        <div id="farm">
+            <h3>Farm</h3>
+            <h4>Grow crops here</h4>
+            <form action="/process_crops" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="crop" value="potatoes">
+            <input type="submit" value="Potatoes: 2-5">
+            </form>
+            <form action="/process_crops" method="POST">
+                {% csrf_token %}
+            <input type="hidden" name="crop" value="corn">
+            <input type="submit" value="Corn: 4-6">
+            </form>
+            <form action="/process_crops" method="POST">
+                {% csrf_token %}
+            <input type="hidden" name="crop" value="wheat">
+            <input type="submit" value="Wheat: 7-12">
+            </form>
+            <h3>Store</h3>
+            <form action="/process_gold" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sell" value="potatoes">
+                <input type="submit" value="Potatoes: 10 gold">
+                </form>
+                <form action="/process_gold" method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="sell" value="corn">
+                <input type="submit" value="Corn: 7 gold">
+                </form>
+                <form action="/process_gold" method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="sell" value="wheat">
+                <input type="submit" value="Wheat: 5 gold">
+                </form>
+        </div>
+
+    </div>
+    <div id="bottom">
+        <div id="activities">
+            <h4>Activities</h4>
+            {% for activity in activities %}
+                <p>{{ activity }}</p>
+            {% endfor %}
+        </div>
+        <div id="reset">
+            <form action="/delete" method="POST">
+                {% csrf_token %}
+            <input type="submit" value="Try Again?">
+            </form>
+        </div>
+    </div>    
+</body>
+</html>
