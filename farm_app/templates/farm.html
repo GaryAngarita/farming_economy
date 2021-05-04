@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h2>Earn 250 gold in 100 moves or less</h2>
+    <h2>Earn 500 gold in 50 moves or less</h2>
     <p>Your gold: {{ request.session.gold }}</p>
     <p>Your potatoes: {{ request.session.potatoes }}</p>
     <p>Your wheat: {{ request.session.wheat }}</p>
@@ -50,6 +50,13 @@
                 <input type="hidden" name="sell" value="wheat">
                 <input type="submit" value="Wheat: 5 gold">
                 </form>
+            <h3>Casino</h3>
+            <h4>Earn or lose 0-50 gold</h4>
+            <form action="/gamble" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="wager" value="slots">
+                <input type="submit" value="Gamble">
+            </form>
         </div>
 
     </div>
