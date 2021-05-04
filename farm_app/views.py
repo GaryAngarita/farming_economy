@@ -21,7 +21,6 @@ def process_crops(request):
         myPotatoes = request.session['potatoes']
         myCorn = request.session['corn']
         myWheat = request.session['wheat']
-        #myGold = request.session['gold']
         crop = request.POST['crop']
         myTime = strftime("%B %d, %Y %H:%M %p", gmtime())
         activities = request.session['activities']
@@ -29,17 +28,17 @@ def process_crops(request):
             potatoes = round(random.random() * 3) + 2
             myPotatoes += potatoes
             request.session['potatoes'] = myPotatoes
-            str = f'{len(activities) + 1}. You have gathered {potatoes} potatoes. Keep it up!'
+            str = f'{len(activities) + 1}. You have gathered {potatoes} potatoes. Keep it up! {myTime}'
         elif crop == "corn":
             corn = round(random.random() * 2) + 4
             myCorn += corn
             request.session['corn'] = myCorn
-            str = f'{len(activities) + 1}. You have gathered {corn} corn. Well done!'
+            str = f'{len(activities) + 1}. You have gathered {corn} corn. Well done! {myTime}'
         else:
             wheat = round(random.random() * 5) + 7
             myWheat += wheat
             request.session['wheat'] = myWheat
-            str = f'{len(activities) + 1}. You have gathered {wheat} wheat. Awesome job!'
+            str = f'{len(activities) + 1}. You have gathered {wheat} wheat. Awesome job! {myTime}'
         activities.insert(0, str)
         request.session['activities'] = activities
         
@@ -79,12 +78,12 @@ def process_gold(request):
         activities.insert(0, str)
         request.session['activities'] = activities
 
-        if myGold >= 500:
+        if request.session['gold'] >= 500:
             root = tkinter.Tk()
             root.withdraw()
             messagebox.showinfo("Congratulation!", f'You made {myGold} gold!')
             return redirect('/delete')
-        elif len(request.session['activities']) == 50 and myGold < 500:
+        elif len(request.session['activities']) == 25 and request.session['gold'] < 500:
             root = tkinter.Tk()
             root.withdraw()
             messagebox.showinfo("Sorry!", f'You only earned {myGold} gold')
@@ -109,12 +108,12 @@ def gamble(request):
         activities.insert(0, str)
         request.session['activities'] = activities
 
-        if myGold >= 500:
+        if request.session['gold'] >= 500:
             root = tkinter.Tk()
             root.withdraw()
             messagebox.showinfo("Congratulation!", f'You made {myGold} gold!')
             return redirect('/delete')
-        elif len(request.session['activities']) == 50 and myGold < 500:
+        elif len(request.session['activities']) == 25 and request.session['gold'] < 500:
             root = tkinter.Tk()
             root.withdraw()
             messagebox.showinfo("Sorry!", f'You only earned {myGold} gold')
