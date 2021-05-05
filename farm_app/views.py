@@ -21,6 +21,7 @@ def process_crops(request):
         myPotatoes = request.session['potatoes']
         myCorn = request.session['corn']
         myWheat = request.session['wheat']
+        myGold = request.session['gold']
         crop = request.POST['crop']
         myTime = strftime("%B %d, %Y %H:%M %p", gmtime())
         activities = request.session['activities']
@@ -41,7 +42,16 @@ def process_crops(request):
             str = f'{len(activities) + 1}. You have gathered {wheat} wheat. Awesome job! {myTime}'
         activities.insert(0, str)
         request.session['activities'] = activities
-        
+        if request.session['gold'] >= 500:
+            root = tkinter.Tk()
+            root.withdraw()
+            messagebox.showinfo("Congratulation!", f'You made {myGold} gold!')
+            return redirect('/delete')
+        elif len(request.session['activities']) == 25 and request.session['gold'] < 500:
+            root = tkinter.Tk()
+            root.withdraw()
+            messagebox.showinfo("Sorry!", f'You only earned {myGold} gold')
+            return redirect('/delete')
     return redirect('/')
 
 def process_gold(request):
