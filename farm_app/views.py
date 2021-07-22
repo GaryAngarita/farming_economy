@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 import random
 from time import gmtime, strftime
@@ -15,6 +16,20 @@ def index(request):
         "activities": request.session['activities']
     }
     return render(request, "farm.html", context)
+
+def store(request):
+    if 'gold' not in request.session:
+        return redirect('/')
+    context = {
+        "activities": request.session['activities']
+    }
+    return render(request, "store.html", context)
+
+def casino(request):
+    context = {
+        "activities": request.session['activities']
+    }
+    return render(request, "casino.html", context)
 
 def process_crops(request):
     if request.method == "POST":
@@ -67,22 +82,22 @@ def process_gold(request):
             myPotatoes = 0
             request.session['potatoes'] = myPotatoes
             str = f'{len(activities) + 1}. You have sold all your {profit} and earned {cropGold}. Wow!'
-            #if request.session['potatoes'] <= 0 and profit == 'potatoes':
-            #    str = f'{len(activities)}. You have sold all your potatoes'
+            if request.session['potatoes'] <= 0:
+                str = f'{len(activities)}. You have sold all your potatoes'
         elif profit == 'corn':
             cropGold = myCorn * 7
             myCorn = 0
             request.session['corn'] = myCorn
             str = f'{len(activities) + 1}. You have sold all your {profit} and earned {cropGold}. Wow!'
-            #if request.session['wheat'] <= 0 and profit == 'wheat':
-            #    str = f'{len(activities)}. You have sold all your wheat'
+            if request.session['corn'] <= 0:
+                str = f'{len(activities)}. You have sold all your corn'
         elif profit == 'wheat':
             cropGold = myWheat * 5
             myWheat = 0
             request.session['wheat'] = myWheat
             str = f'{len(activities) + 1}. You have sold all your {profit} and earned {cropGold}. Wow!'
-            #if request.session['corn'] <= 0 and profit == 'corn':
-            #    str = f'{len(activities)}. You have sold all your corn'     
+            if request.session['wheat'] <= 0:
+                str = f'{len(activities)}. You have sold all your wheat'     
         myGold += cropGold
         request.session['gold'] = myGold
         activities.insert(0, str)
@@ -98,7 +113,7 @@ def process_gold(request):
             root.withdraw()
             messagebox.showinfo("Sorry!", f'You only earned {myGold} gold')
             return redirect('/delete')
-    return redirect('/')
+    return redirect('/store')
 
 def gamble(request):
     if request.method == 'POST':
@@ -128,7 +143,7 @@ def gamble(request):
             root.withdraw()
             messagebox.showinfo("Sorry!", f'You only earned {myGold} gold')
             return redirect('/delete')
-    return redirect('/')
+    return redirect('/casino')
 
 def delete(request):
     request.session.flush()

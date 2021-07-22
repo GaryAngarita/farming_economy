@@ -14,30 +14,17 @@
     <p>Your potatoes: {{ request.session.potatoes }}</p>
     <p>Your wheat: {{ request.session.wheat }}</p>
     <p>Your corn: {{ request.session.corn }}</p>
-
-    <div id="options">
-        <div id="farm">
-            <h3>Farm</h3>
-            <h4>Grow crops here</h4>
-            <form action="/process_crops" method="POST">
+    <div id="casino">
+        <h3>Casino</h3>
+        <h4>Earn or lose 0-50 gold</h4>
+        <form action="/gamble" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="crop" value="potatoes">
-            <input type="submit" value="Potatoes: 2-5">
-            </form>
-            <form action="/process_crops" method="POST">
-                {% csrf_token %}
-            <input type="hidden" name="crop" value="corn">
-            <input type="submit" value="Corn: 4-6">
-            </form>
-            <form action="/process_crops" method="POST">
-                {% csrf_token %}
-            <input type="hidden" name="crop" value="wheat">
-            <input type="submit" value="Wheat: 7-12">
-            </form>
-        </div>
-        <a href="/store" role="button">Go to the store</a>
-        <a href="/casino" role="button">Go to the casino</a>        
-    </div>
+            <input type="hidden" name="wager" value="slots">
+            <input type="submit" value="Gamble">
+        </form>
+    </div>    
+    <a href="/store" role="button">Go to the store</a>
+    <a href="/" role="button">Go to the farm</a> 
     <div id="bottom">
         <div id="activities">
             <h4>Activities</h4>
@@ -51,6 +38,5 @@
             <input type="submit" value="Try Again?">
             </form>
         </div>
-    </div>    
+    </div>  
 </body>
-</html>
