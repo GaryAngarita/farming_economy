@@ -8,7 +8,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body id="bg" style="background-image: url({% static 'img/slot.jpg' %})";>
     <h2>Earn 500 gold in 25 moves or less</h2>
     <p>Your gold: {{ request.session.gold }}</p>
     <p>Your potatoes: {{ request.session.potatoes }}</p>
