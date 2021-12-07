@@ -15,7 +15,7 @@
     <p>Your wheat: {{ request.session.wheat }}</p>
     <p>Your corn: {{ request.session.corn }}</p>
 
-    <div id="options">
+    <div class="options">
         <div id="farm">
             <h3>Farm</h3>
             <h4>Grow crops here</h4>
@@ -35,8 +35,11 @@
             <input type="submit" value="Wheat: 7-12">
             </form>
         </div>
-        <a href="/store" role="button">Go to the store</a>
-        <a href="/casino" role="button">Go to the casino</a>        
+        <div id="links">
+            <a href="/store" role="button">Go to the store</a>
+            <br>
+            <a href="/casino" role="button">Go to the casino</a>
+        </div>        
     </div>
     <div id="bottom">
         <div id="activities">

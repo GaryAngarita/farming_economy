@@ -14,27 +14,35 @@
     <p>Your potatoes: {{ request.session.potatoes }}</p>
     <p>Your wheat: {{ request.session.wheat }}</p>
     <p>Your corn: {{ request.session.corn }}</p>
-    <div id="store">
-        <h3>Store</h3>
-        <h4>Sell crops here</h4>
-        <form action="/process_gold" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="sell" value="potatoes">
-            <input type="submit" value="Potatoes: 10 gold">
-            </form>
+    <div class="options">
+        <div id="store">
+            <h3>Store</h3>
+            <h4>Sell crops here</h4>
             <form action="/process_gold" method="POST">
                 {% csrf_token %}
-            <input type="hidden" name="sell" value="corn">
-            <input type="submit" value="Corn: 7 gold">
-            </form>
-            <form action="/process_gold" method="POST">
-                {% csrf_token %}
-            <input type="hidden" name="sell" value="wheat">
-            <input type="submit" value="Wheat: 5 gold">
-            </form>
+                <input type="hidden" name="sell" value="potatoes">
+                <input type="submit" value="Potatoes: 10 gold">
+                </form>
+                <form action="/process_gold" method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="sell" value="corn">
+                <input type="submit" value="Corn: 7 gold">
+                </form>
+                <form action="/process_gold" method="POST">
+                    {% csrf_token %}
+                <input type="hidden" name="sell" value="wheat">
+                <input type="submit" value="Wheat: 5 gold">
+                </form>
+        </div>
+        <div id="links">
+            <a href="/" role="button">Go to the farm</a>
+            <br>
+            <a href="/casino" role="button">Go to the casino</a>
+        </div>
     </div>
-    <a href="/" role="button">Go to the farm</a>
-    <a href="/casino" role="button">Go to the casino</a> 
+    <div class="options">
+        
+    </div>
     <div id="bottom">
         <div id="activities">
             <h4>Activities</h4>

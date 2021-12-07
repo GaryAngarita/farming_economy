@@ -9,10 +9,10 @@ h2{
     background-blend-mode: lighten;
 }
 
-#options{
+.options{
     align-content: center;
     margin:auto;
-    display: flex;
+    display: inline-block;
 }
 #farm, #store, #casino{
     display: inline-block;
@@ -26,6 +26,14 @@ h2{
 #store, #casino{
     vertical-align: top;
 }
+
+#links{
+    align-content: center;
+    display: inline-block;
+    place-content: center;
+    vertical-align: middle;
+}
+
 h3{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
